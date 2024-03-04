@@ -7,3 +7,6 @@ env\Scripts\activate
 pip install -r requirements.txt
 manage.py makemigraions
 manage.py migrate
+
+create .env file same as .envExample
+with same constants
