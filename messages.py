@@ -43,6 +43,7 @@ common = {
         "USER_NOT_REGISTERED" : 'You are not a registered user.',
         "SESSION_EXPIRED" : 'Your authentication session has expired.',
         "INVALID_TOKEN" : 'Invalid token.',
+        'TOKEN_EXPIRED': 'This token is already expired',
         "SOMETHING_WENT_WRONG" : 'Something went wrong.',
         "USER_NOT_ADMIN" : "You do not have permission to perform this action.",
         "AUTHENTICATION_ERROR" : "Authentication credentials were not provided.",
