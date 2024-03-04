@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from authentication.backends.backends import CustomUserModelBackend
 from django.contrib.auth.hashers import check_password
-from authentication.models import User,Companies
+from authentication.models import User,Companies,BlackListedToken,IsTokenValid
 from .serializers import CreateUserSerializer,UserChangePasswordSerializer, SendPasswordResetEmailSerializer,UserPasswordResetSerializer,UpdateProfileSerializer, UserDeleteSerializer,ProfileSerializer,UpdateUserProfileSerializer,UpdateProfileStatusSerializer,UserListSerializer
 from authentication.api.renderers import UserRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -34,6 +34,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 # user registration 
 class CreateUserView(APIView):
     renderer_classes = [UserRenderer]  # it will give errors in error dictionary
+    permission_classes = [IsTokenValid]
     allowed_methods = ['POST'] # allowed method post only
 
     def post(self, request, format=None):
@@ -101,7 +102,10 @@ class CreateUserView(APIView):
             return send_failure_response(message= common["messages"]["SOMETHING_WENT_WRONG"], code=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 # user login 
-class UserLoginView(APIView):  
+class UserLoginView(APIView):
+    renderer_classes = [UserRenderer]
+    allowed_methods = ['POST'] # allowed method post only
+    
     def post(self, request, *args, **kwargs):
         try:
             email = request.data.get('email')
@@ -158,9 +162,40 @@ class UserLoginView(APIView):
             # You can also return a custom error response
             return send_failure_response(message= common["messages"]["SOMETHING_WENT_WRONG"], code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+class LogoutView(APIView):
+    renderer_classes = [UserRenderer]
+    allowed_methods = ['POST'] # allowed method post only
+    
+    def post(self, request):
+        if not request.user.is_authenticated:  # Check if user is not authenticated
+            return send_failure_response(message=common["messages"]["AUTHENTICATION_ERROR"], code=status.HTTP_401_UNAUTHORIZED)
+        try:
+            # Get the token from the authorization header
+            authorization_header = request.META.get('HTTP_AUTHORIZATION', '')
+            if not authorization_header.startswith('Bearer '):
+                return send_failure_response(message=common["messages"]["INVALID_TOKEN"], code=status.HTTP_401_UNAUTHORIZED)
+            
+            token = authorization_header.split('Bearer ')[1]
+
+            # Invalidate token only if it's valid
+            if token:
+                user_id = request.user.id
+
+                # Check if token is already blacklisted
+                if BlackListedToken.objects.filter(user_id=user_id, token=token).exists():
+                    return send_failure_response(message=common["messages"]["TOKEN_EXPIRED"], code=status.HTTP_400_BAD_REQUEST)
+
+                # Add token to blacklist
+                BlackListedToken.objects.create(user_id=user_id, token=token)
+
+            return send_success_response(data={}, message=common["messages"]["USER_LOGOUT_SUCCESSFULLY"], code=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return send_failure_response(message=common["messages"]["SOMETHING_WENT_WRONG"], code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 # get profile details   
 class ProfileView(APIView):
     renderer_classes = [UserRenderer]  # it will give errors in error dictionary
+    permission_classes = [IsTokenValid]
     allowed_methods = ['GET'] # allowed method get only
 
     def get(self,request, format=None):
@@ -180,6 +215,7 @@ class ProfileView(APIView):
 # update user profile   
 class UpdateUserProfileView(APIView):
     renderer_classes = [UserRenderer]
+    permission_classes = [IsTokenValid]
     allowed_methods = ['PATCH']
 
     def patch(self, request, format=None):
@@ -243,6 +279,7 @@ class UpdateUserProfileView(APIView):
 # delete user     
 class DeleteUserView(APIView):
     renderer_classes = [UserRenderer]  # it will give errors in error dictionary
+    permission_classes = [IsTokenValid]
     allowed_methods = ['DELETE'] # allowed method delete only
 
     def delete(self, request, format=None):
@@ -288,6 +325,7 @@ class DeleteUserView(APIView):
 # change password
 class UserChangePasswordView(APIView):
     renderer_classes = [UserRenderer]  # it will give errors in error dictionary
+    permission_classes = [IsTokenValid]
     allowed_methods = ['POST'] # allowed method post only
 
     def post(self,request, format=None):
@@ -390,6 +428,7 @@ class UserPasswordResetView(APIView):
 # get user profile by id
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]  # it will give errors in error dictionary
+    permission_classes = [IsTokenValid]
     allowed_methods = ['GET'] # allowed method get only
 
     def get(self,request, format=None):
@@ -421,6 +460,7 @@ class UserProfileView(APIView):
 # update profile for user role
 class UpdateProfileView(APIView):
     renderer_classes = [UserRenderer]  # it will give errors in error dictionary
+    permission_classes = [IsTokenValid]
     allowed_methods = ['PATCH'] # allowed method patch only
 
     def patch(self, request, format=None):
@@ -463,6 +503,7 @@ class UpdateProfileView(APIView):
 # update user status       
 class UpdateUserStatusView(APIView):
     renderer_classes = [UserRenderer]  # it will give errors in error dictionary
+    permission_classes = [IsTokenValid]
     allowed_methods = ['POST'] # allowed method post only
         
     def post(self, request, format=None):
@@ -515,6 +556,7 @@ class UpdateUserStatusView(APIView):
 # user listing
 class UserListView(APIView):
     renderer_classes = [UserRenderer]  # Assuming UserRenderer is defined somewhere
+    permission_classes = [IsTokenValid]
     allowed_methods = ['GET']  # Allowed method get only
 
     def get(self, request, format=None):
@@ -575,6 +617,7 @@ class UserListView(APIView):
 
 class CommonListView(APIView):
     renderer_classes = [UserRenderer]  # it will give errors in error dictionary
+    permission_classes = [IsTokenValid]
     allowed_methods = ['GET'] # allowed method get only
 
     def get(self, request, format=None):
@@ -593,6 +636,7 @@ class CommonListView(APIView):
     
 class ChangeUserPasswordView(APIView):
     renderer_classes = [UserRenderer]  # it will give errors in error dictionary
+    permission_classes = [IsTokenValid]
     allowed_methods = ['POST'] # allowed method post only
 
     def post(self,request, format=None):
