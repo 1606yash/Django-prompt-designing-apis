@@ -1,0 +1,746 @@
+{
+	"info": {
+		"_postman_id": "7ce74bdd-964e-40d8-a543-9767812b9bde",
+		"name": "experience AI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24479107",
+		"_collection_link": "https://lively-star-725730.postman.co/workspace/Team-Workspace~83cc1bfd-4b02-47d0-81b4-de74731e0d30/collection/24479107-7ce74bdd-964e-40d8-a543-9767812b9bde?action=share&source=collection_link&creator=24479107"
+	},
+	"item": [
+		{
+			"name": "common api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/get-companies/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"get-companies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Api",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "akhil@yopmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Sipl@123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/login/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User API",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "akhil",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Sipl@123",
+							"type": "text"
+						},
+						{
+							"key": "password2",
+							"value": "Sipl@123",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "akhil@yopmail.com",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Indore",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/add-user/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"add-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "password2",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/change-password/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"change-password",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Reset Password Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "akhil@yopmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/send-reset-password-email/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"send-reset-password-email",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "password",
+							"value": "Hello123",
+							"type": "text"
+						},
+						{
+							"key": "password2",
+							"value": "Hello123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/reset-password/MQ/c210v3-698698ca7d5a02fac5d15705996b25cd/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"reset-password",
+						"MQ",
+						"c210v3-698698ca7d5a02fac5d15705996b25cd",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Profile Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/profile/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"profile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/get-user-profile/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"get-user-profile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Tushar",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "avn@yopmail.com",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Indore",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/update-profile/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"update-profile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Profile API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Tushar",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "tushar@yopmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "address",
+							"value": "ayodhya ram ",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/update-user-profile/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"update-user-profile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3NDA1NTcxLCJpYXQiOjE3MDc0MDM3NzEsImp0aSI6IjZiOWQyYTAxZjEzZDQ3ZjM4OTdmMDVlYWY3NGJjNGQ3IiwidXNlcl9pZCI6MX0.7G5N98nq9f5muzMiVdycDkxxmOLBt-u751HkgQSisUY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/delete-user/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"delete-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "templates listing",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/templates/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"templates",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update template",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3NTY2NTA1LCJpYXQiOjE3MDc0ODAxMDUsImp0aSI6IjQxMWViZWFiMWEzNTQ1OTU4MzdkYzBjYjkzNDcxMjUwIiwidXNlcl9pZCI6M30.6EzqkFEJzGh-0U9fLA1Rcc-WVOGSDIi4Go6HFm-9ct8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 7,\r\n  \"label\": \"Updated Label1\",\r\n  \"system_promt_acron_analytic_service\": \"Updated Analytic Service\",\r\n  \"system_promt_acron_safety_service\": \"Updated Safety Service\",\r\n  \"system_promt_acron_srs\": \"Updated SRS\",\r\n  \"questions\": [\r\n    {\"id\": 1, \"question_text\": \"Updated Question\", \"description\": \"Updated Description\"},\r\n    {\"id\": 2,\"question_text\": \"Updated Question\", \"description\": \"Updated Description\"}\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/templates-update/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"templates-update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout Api",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3NjMzODU0LCJpYXQiOjE3MDc1NDc0NTQsImp0aSI6ImI0YjRjY2Y5NzFhMDQzOTc5MDAxODU4YmNkNzY0NTczIiwidXNlcl9pZCI6MX0.fWjD64M701ar8Hvznqqc2y1uBNNproELJNg_LyjLG_k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "refresh",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwNzc1NjIzOCwiaWF0IjoxNzA3NjY5ODM4LCJqdGkiOiI3M2NmNTYzYTYzOTE0YmFlYjdmZTI3MDJjOTRlYzVmOSIsInVzZXJfaWQiOjR9.XIz6GALyweY_zifDqqm8qvIj9BkckJoZftwsgKnx5ds",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/logout/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update profile status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "is_active",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/update-user-profile-status/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"update-user-profile-status",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User listing",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/get-users-list/?page=2&company_id=1&per_page=2&search=",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"get-users-list",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "company_id",
+							"value": "1"
+						},
+						{
+							"key": "per_page",
+							"value": "2"
+						},
+						{
+							"key": "search",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "custom logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/logout/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generate output",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"label\": \"Destiny Planner\",\r\n    \"question_n_answer\": [\r\n        // {\"question_text\": \"Destination for the space adventure?\", \"answer\": \"Exoplanet, Nebula, Space Station\"},\r\n        {\"question_text\": \"Destination for holiday in India?\", \"answer\": \"Kashmir\"},\r\n        {\"question_text\": \"Type of weather?\", \"answer\": \"Winter\"}\r\n    ],\r\n    \"company_text\": \"questions\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/generate-output/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"generate-output",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://experienceai-be.siplsolutions.com/apiv1",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000/apiv1",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5MDM5OTExLCJpYXQiOjE3MDg5NTM1MTEsImp0aSI6ImU3NDgyMzRkY2E4YjQyYmZhM2M5ZjAzYjM2ZDUzM2EyIiwidXNlcl9pZCI6MX0.F6MJb7VIkbms_NGmLPphYy_jgucgIngwq2ytzQq8J6g",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "url",
+			"value": "https://acornflo.co.uk/apiv1",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
