@@ -26,7 +26,7 @@ urlpatterns = [
 
 # Optionally include admin URLs if enabled
 if settings.ADMIN_ENABLED:
-    urlpatterns += [path('acron-admin/', admin.site.urls)]
+    urlpatterns += [path('admin/', admin.site.urls)]
 
 # Serve static files during development
 #if settings.DEBUG:
