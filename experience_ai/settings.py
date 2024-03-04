@@ -30,7 +30,7 @@ with open(os.path.join(BASE_DIR,'secret_key.txt')) as f:
 DEBUG = True
 
 # If ADMIN_ENABLED = False it means django default admin will not be accessible
-ADMIN_ENABLED = False
+ADMIN_ENABLED = True
 
 
 ALLOWED_HOSTS = [
