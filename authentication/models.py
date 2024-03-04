@@ -164,5 +164,34 @@ class UserFavTemplates(models.Model):
         db_table = 'user_fav_templates'
 
 
+class BlackListedToken(models.Model):
+    token = models.CharField(max_length=500)
+    user = models.ForeignKey(User, related_name="token_user", on_delete=models.CASCADE,null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        db_table = 'blacklist_access_token'
+        unique_together = ("token", "user")
+
+
+class IsTokenValid(BasePermission):
+    def has_permission(self, request, view):
+        user_id = request.user.id
+        token = self.get_token_from_request(request)
+        
+        if token:
+            try:
+                is_blacklisted = BlackListedToken.objects.get(user_id=user_id, token=token)
+                if is_blacklisted:
+                    error_message = {"message": "Token is expired."}
+                    raise PermissionDenied({"messages": [error_message]})
+            except BlackListedToken.DoesNotExist:
+                return True
+        return False
+    
+    def get_token_from_request(self, request):
+        authorization_header = request.META.get('HTTP_AUTHORIZATION', '')
+        if authorization_header.startswith('Bearer '):
+            return authorization_header.split('Bearer ')[1]
+        return None
 
