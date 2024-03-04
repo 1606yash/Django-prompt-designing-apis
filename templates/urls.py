@@ -15,8 +15,4 @@ urlpatterns = [
     path('change-template-status/', template_update_status, name='update-status-template'),
     path('generate-output/', generate_chatgpt_output, name='generate-chatgpt-output'),
     path('generate-output-helper/', generate_chatgpt_output_helper, name='generate-chatgpt-output-helper'),
-
-    # path('generate-output/', chatGPT, name='generate-chatgpt-output'),
-    # path('questions/', question_list, name='question-list'),
-    # path('questions/<int:pk>/', question_detail, name='question-detail'),
 ]
