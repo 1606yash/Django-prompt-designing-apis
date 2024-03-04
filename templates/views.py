@@ -2,7 +2,7 @@
 import os
 from rest_framework.decorators import api_view,permission_classes,renderer_classes
 from rest_framework import status
-from authentication.models import Template, Question, UserFavTemplates, Companies
+from authentication.models import Template, Question, UserFavTemplates, Companies,IsTokenValid
 from helpers import *
 from authentication.api.renderers import UserRenderer
 from rest_framework.permissions import IsAuthenticated
@@ -20,7 +20,7 @@ from django.shortcuts import render
 
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsTokenValid])
 @renderer_classes([UserRenderer])
 def template_list(request):
     current_user = request.user
@@ -133,7 +133,7 @@ def template_list(request):
             error_message = str(e.args[1]) if e.args else common["messages"]["SOMETHING_WENT_WRONG"]
             return send_failure_response(data=request.data, message=error_message, code=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsTokenValid])
 @renderer_classes([UserRenderer])
 @api_view(['POST'])
 def template_update(request):
@@ -198,7 +198,7 @@ def template_update(request):
         
 
 
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsTokenValid])
 @renderer_classes([UserRenderer])
 @api_view(['DELETE'])     
 def template_delete(request, template_id = None):
@@ -210,7 +210,8 @@ def template_delete(request, template_id = None):
     template.delete(request.user)
     return send_success_response(request.data, code=status.HTTP_200_OK, message=common["messages"]["TEMPLATE_DELETED_SUCCESS"])
  
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsTokenValid])
+@renderer_classes([UserRenderer])
 @api_view(['GET'])
 def template_detail(request, template_id):   
     try:
@@ -267,7 +268,7 @@ def template_detail(request, template_id):
     return send_success_response(template_data)
 
 # template view page for the user
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsTokenValid])
 @renderer_classes([UserRenderer])
 @api_view(['GET'])
 def template_list_user(request):
@@ -349,6 +350,7 @@ def template_list_user(request):
         return send_success_response(context, message="Template data.")
   
 # template user favourite for the user
+@permission_classes([IsAuthenticated,IsTokenValid])
 @api_view(['POST'])
 @renderer_classes([UserRenderer])
 def user_favourite_template(request):
@@ -390,6 +392,7 @@ def user_favourite_template(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated,IsTokenValid])
 @renderer_classes([UserRenderer])
 def template_update_status(request):
     # Extract data from the request
@@ -415,6 +418,7 @@ def template_update_status(request):
     return send_success_response(data=request.data, message=common["messages"]["TEMPLATE_STATUS_CHANGED_SUCCESS"], code=status.HTTP_200_OK)
     
 @api_view(['POST'])
+@permission_classes([IsAuthenticated,IsTokenValid])
 @renderer_classes([UserRenderer])
 def generate_chatgpt_output_helper(request):
     try:
@@ -446,6 +450,8 @@ def generate_chatgpt_output_helper(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated,IsTokenValid])
+@renderer_classes([UserRenderer])
 def generate_chatgpt_output(request):
     try:
         
