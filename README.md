@@ -14,8 +14,7 @@ pip install django-dotenv
 pip install django-cors-headers
 pip install openai
 
-manage.py makemigraions
-manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 
-create .env file same as .envExample
-with same constants
+create .env file same as .envExample with same constants
