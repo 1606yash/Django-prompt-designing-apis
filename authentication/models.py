@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.utils import timezone
 from django.conf import settings
+from rest_framework.permissions import BasePermission
+from rest_framework.exceptions import PermissionDenied
+
 
 class SoftDelete(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
