@@ -164,6 +164,7 @@ class UserLoginView(APIView):
 
 class LogoutView(APIView):
     renderer_classes = [UserRenderer]
+    permission_classes = [IsTokenValid]
     allowed_methods = ['POST'] # allowed method post only
     
     def post(self, request):
