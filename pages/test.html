@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming API Data in JavaScript</title>
+</head>
+<body>
+    <div id="output"></div>
+
+    <script>
+
+const apiUrl = 'http://127.0.0.1:8000/apiv1/generate-output/';
+const eventSource = new EventSource(apiUrl, { headers: { 'Accept': 'text/event-stream' } });
+
+console.log(apiUrl);
+// // Your data for the POST request
+// const postData = {
+//   key1: 'value1',
+//   key2: 'value2'
+//   // Add more key-value pairs as needed
+// };
+
+// // Make the POST request
+// fetch(apiUrl, {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//     'Accept': 'application/json'  // Adjust 'Accept' header based on what your server expects
+//   },
+//   body: JSON.stringify(postData)
+// })
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
+
+//     // Open EventSource for streaming data after successful POST
+//     const eventSource = new EventSource(apiUrl, { headers: { 'Accept': 'text/event-stream' } });
+
+//     eventSource.onmessage = function(event) {
+//       const data = event.data;
+//       // Process the received data
+//       console.log(data);
+//     };
+
+//     eventSource.onerror = function(error) {
+//       console.error('EventSource failed:', error);
+//       eventSource.close();
+//     };
+//   })
+//   .catch(error => {
+//     console.error('POST Error:', error);
+//   });
+</script>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming API Data in JavaScript</title>
+</head>
+<body>
+    <div id="output"></div>
+
+    <script>
+        const outputDiv = document.getElementById('output');
+    //    / const eventSource = new EventSource('http://127.0.0.1:8000/api/generate-output/', { headers: { 'Accept': 'text/event-stream' } });
+       const eventSource = new EventSource('http://127.0.0.1:8000/api/generate-output/', { headers: { 'Accept': 'text/event-stream' } });
+        // console.log(eventSource)
+        eventSource.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            console.log('17:', data.choices[0].delta.content )
+
+        // Process the received data
+            outputDiv.innerHTML += `<p>${data.choices[0].delta.content }</p>`;
+        };
+
+        eventSource.onerror = function(error) {
+            console.error('EventSource failed:', error);
+            eventSource.close();
+        };
+        // Replace the URL with your API endpoint
+        const apiUrl = 'http://127.0.0.1:8000/api/generate-output/';
+
+        // Use the Fetch API to make a streaming request
+        // fetch(apiUrl, {
+        //     method: 'GET',
+        //     headers: { 'Accept': 'text/event-stream' }})
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             throw new Error(`HTTP error! Status: ${response.status}`);
+        //         }
+        //         // Ensure the response is a readable stream
+        //         const reader = response.body.getReader();
+                  
+        //         // Define a function to process chunks of data
+        //         const processChunk = ({ done, value }) => {
+        //             if (done) {
+        //                 // Handle stream completion
+        //                 console.log('Stream completed');
+        //                 return;
+        //             }
+
+        //             // Process the chunk of data
+        //             const chunkText = new TextDecoder().decode(value);
+        //             outputDiv.innerHTML += `<p>${chunkText}</p>`;
+
+        //             // Continue reading the next chunk
+        //             reader.read().then(processChunk);
+        //         };
+
+        //         // Start reading the stream
+        //         return reader.read().then(processChunk);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error:', error);
+        //     });
+    </script>
+</body>
+</html> -->

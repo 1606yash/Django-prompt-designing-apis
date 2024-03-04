@@ -1,0 +1,25 @@
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-relay.sendinblue.com'
+EMAIL_PORT = 587
+EMAIL_USER = 'mohit.mandley@systematixindia.com'
+EMAIL_PASS = 'hXPDFkEbzdY5ps7n'
+EMAIL_FROM = 'mohit.mandley@systematixindia.com'
+
+DB_ENGINE = 'django.db.backends.mysql'
+DB_NAME = 'db_experienceai'
+DB_USER = 'user_experienceai'
+DB_PASSWORD = '2n4ga~8!Y!5C'
+DB_HOST = 35.177.19.129
+DB_PORT = 3306
+
+# DB_ENGINE = 'django.db.backends.mysql'
+# DB_NAME = 'db_experienceai'
+# DB_USER = 'root'
+# DB_PASSWORD = ''
+# DB_HOST = 'localhost'
+# DB_PORT = 3306
+
+DJANGO_SETTINGS_MODULE = 'experience_ai.settings'
+OPENAI_APIKEY = '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'
+FRONTEND_URL = 'https://acornflo.co.uk/auth/reset-password'
+BACKEND_URL = 'https://acornflo.co.uk/'
