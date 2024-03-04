@@ -34,13 +34,11 @@ ADMIN_ENABLED = False
 
 
 ALLOWED_HOSTS = [
-    "experienceai-be.siplsolutions.com",
     "127.0.0.1",
-    "acornflo.co.uk"
-    # "localhost"
+    "localhost"
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://*.siplsolutions.com','https://*.127.0.0.1','https://acornflo.co.uk']
+CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1']
 
 # Application definition
 
@@ -334,9 +332,9 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 #SECURE_SSL_REDIRECT = True
 
-
+# at Production below settings should active
 # HSTS settings
-SECURE_HSTS_SECONDS = 31536000 # 1 year
-SECURE_HSTS_PRELOAD = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_SECONDS = 31536000 # 1 year
+# SECURE_HSTS_PRELOAD = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
